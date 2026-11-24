@@ -1,0 +1,78 @@
+PASSO A PASSO — VOZ DO CLIENTE
+================================
+
+1. PRÉ-REQUISITOS
+-----------------
+- Python 3.10 ou superior.
+- PowerShell (Windows) ou terminal equivalente.
+- Navegador moderno com JavaScript habilitado.
+
+2. INSTALAÇÃO
+-------------
+1. Abra o terminal na pasta painel-avaliacoes.
+2. Crie um ambiente virtual:
+   python -m venv .venv
+3. Ative-o no PowerShell:
+   .\.venv\Scripts\Activate.ps1
+4. Instale as dependências:
+   python -m pip install -r backend\requirements.txt
+
+3. INICIAR O BACKEND
+--------------------
+1. Ainda na raiz do projeto, execute:
+   python -m backend.app
+2. A API será iniciada em http://127.0.0.1:5000.
+3. Teste no navegador:
+   http://127.0.0.1:5000/api/reviews
+
+   O retorno deve ser um JSON com "reviews" e "summary".
+
+4. INICIAR O FRONTEND
+---------------------
+1. Em outro terminal, na raiz, execute:
+   python -m http.server 8080
+2. Abra http://127.0.0.1:8080.
+3. Confira os KPIs, o gráfico, os temas e a lista de avaliações.
+
+Também é possível abrir index.html diretamente. Nesse caso, o frontend usa
+http://localhost:5000 e o fallback local se a API não estiver disponível.
+
+5. USAR O PAINEL
+----------------
+- Use a busca para procurar texto ou autor.
+- Combine os filtros de sentimento, tema e nota.
+- Clique em um cartão de tema para filtrar rapidamente.
+- Clique em "Responder" para abrir o rascunho.
+- Escolha o tom, edite o texto e copie-o para publicação manual.
+- A classificação automática é apenas apoio e deve ser revisada.
+
+6. API
+------
+GET /api/reviews
+Retorna:
+- reviews: avaliações com sentimento e temas.
+- summary: total, média, contagens, temas e linha do tempo.
+
+POST /api/reply
+Corpo JSON:
+{"id": 1, "tone": "cordial"}
+
+Tons disponíveis: cordial, formal e descontraido.
+
+7. MANUTENÇÃO
+-------------
+- Edite as avaliações de demonstração em backend\data.py.
+- Edite o vocabulário e os templates em backend\analyzer.py.
+- Edite a interface em index.html, assets\css\style.css e assets\js\script.js.
+- Ao alterar dependências, atualize backend\requirements.txt.
+- Após mudanças Python, valide com:
+  python -m compileall backend
+
+8. SOLUÇÃO DE PROBLEMAS
+-----------------------
+- "flask_cors não encontrado": ative o ambiente virtual e rode a instalação
+  das dependências novamente.
+- Tela sem dados: confirme se o backend está rodando na porta 5000 e veja o
+  console do navegador.
+- Erro de CORS: sirva o frontend por HTTP e mantenha a API em execução.
+- Cópia bloqueada pelo navegador: selecione o texto no campo e copie manualmente.

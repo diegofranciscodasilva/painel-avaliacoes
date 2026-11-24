@@ -1,0 +1,53 @@
+VERSÃO DO PROJETO
+=================
+
+Nome: Voz do Cliente — Painel de Avaliações
+Versão: 1.0.1
+Data: 2026-11-19
+Status: demonstração funcional
+
+RESUMO DA VERSÃO
+----------------
+Esta versão entrega um painel responsivo para leitura de avaliações, análise
+léxica de sentimento e temas, filtros e geração de rascunhos de respostas.
+
+ARQUIVOS
+--------
+- index.html: estrutura da página, navegação, indicadores, filtros e modal.
+- assets\css\style.css: tema visual, componentes e responsividade.
+- assets\js\script.js: carregamento, fallback, filtros, gráfico e interações.
+- backend\app.py: aplicação Flask e endpoints HTTP.
+- backend\analyzer.py: normalização, sentimento, temas, resumo e respostas.
+- backend\data.py: doze avaliações fictícias para demonstração.
+- backend\__init__.py: permite executar o backend como módulo Python.
+- backend\requirements.txt: Flask e Flask-CORS.
+- README.md: visão geral, instalação, API e estrutura.
+- passo-a-passo.txt: guia operacional completo.
+- versao.txt: este histórico e planejamento.
+
+MELHORIAS REALIZADAS
+--------------------
+- Execução do backend compatível com "python -m backend.app".
+- Configuração de host, porta e debug por variáveis de ambiente.
+- Validação de corpo JSON inválido no endpoint de respostas.
+- Tratamento de tom de resposta com tipo inválido.
+- Tratamento de autor sem nome ao gerar rascunho.
+- Tratamento de falha ao usar a área de transferência.
+- Documentação de instalação, operação, API, limitações e manutenção.
+
+LIMITAÇÕES ATUAIS
+-----------------
+- Os dados ficam em memória e são fictícios.
+- O classificador não compreende ironia ou contexto profundo.
+- Não há autenticação, banco de dados ou publicação direta de respostas.
+- O frontend usa uma URL local padrão para a API.
+
+PRÓXIMAS MELHORIAS
+------------------
+1. Substituir os dados locais por banco de dados e paginação.
+2. Adicionar autenticação e perfis de acesso.
+3. Criar testes automatizados para API, análise e interface.
+4. Melhorar o modelo de linguagem para português e permitir feedback humano.
+5. Adicionar importação de avaliações de plataformas externas.
+6. Configurar logs, métricas, tratamento de erros e deploy em produção.
+7. Servir frontend e API com configuração de ambiente única e HTTPS.

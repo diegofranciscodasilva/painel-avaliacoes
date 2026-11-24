@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voz do Cliente | Painel de Avaliações</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="container header__container">
+            <a href="#resumo" class="header__logo"><i class="ri-chat-smile-3-line"></i> Voz do Cliente</a>
+
+            <!-- Menu: vira botão abre/fecha em até 768px -->
+            <nav class="header__nav" id="nav-menu">
+                <ul class="header__list">
+                    <li><a href="#resumo" class="header__link">Resumo</a></li>
+                    <li><a href="#evolucao" class="header__link">Evolução</a></li>
+                    <li><a href="#temas" class="header__link">Temas</a></li>
+                    <li><a href="#avaliacoes" class="header__link">Avaliações</a></li>
+                </ul>
+            </nav>
+            <button class="header__toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <i class="ri-menu-line"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========== RESUMO ========== -->
+        <section class="section" id="resumo">
+            <div class="container">
+                <h1 class="section-title">Entenda o que seus clientes estão dizendo</h1>
+                <p class="section-subtitle">Indicadores, tendências e temas recorrentes a partir das avaliações
+                    recebidas.</p>
+
+                <div class="kpis" id="kpis"></div>
+                <p class="notice"><i class="ri-information-line"></i>
+                    A classificação de sentimento é automática e pode errar (ironia, gírias, regionalismos). Use como
+                    apoio, não como verdade absoluta.</p>
+            </div>
+        </section>
+
+        <!-- ========== EVOLUÇÃO ========== -->
+        <section class="section section--alt" id="evolucao">
+            <div class="container">
+                <h2 class="section-title">Sentimento ao longo do tempo</h2>
+                <p class="section-subtitle">Distribuição mensal de comentários positivos, neutros e negativos.</p>
+                <div class="card">
+                    <div class="legend">
+                        <span><i class="dot dot--pos"></i> Positivo</span>
+                        <span><i class="dot dot--neu"></i> Neutro</span>
+                        <span><i class="dot dot--neg"></i> Negativo</span>
+                    </div>
+                    <div class="timeline" id="timeline"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TEMAS ========== -->
+        <section class="section" id="temas">
+            <div class="container">
+                <h2 class="section-title">Temas mais mencionados</h2>
+                <p class="section-subtitle">Clique em um tema para filtrar as avaliações.</p>
+                <div class="topics" id="topics"></div>
+            </div>
+        </section>
+
+        <!-- ========== AVALIAÇÕES ========== -->
+        <section class="section section--alt" id="avaliacoes">
+            <div class="container">
+                <h2 class="section-title">Caixa de entrada</h2>
+                <p class="section-subtitle">Pesquise, filtre e prepare respostas.</p>
+
+                <!-- Filtros -->
+                <div class="filters">
+                    <label class="field field--search">
+                        <i class="ri-search-line"></i>
+                        <input type="search" id="f-search" placeholder="Buscar nos comentários"
+                            aria-label="Buscar nos comentários" />
+                    </label>
+                    <select id="f-sentiment" aria-label="Filtrar por sentimento">
+                        <option value="">Todos os sentimentos</option>
+                        <option value="positive">Positivo</option>
+                        <option value="neutral">Neutro</option>
+                        <option value="negative">Negativo</option>
+                    </select>
+                    <select id="f-topic" aria-label="Filtrar por tema">
+                        <option value="">Todos os temas</option>
+                    </select>
+                    <select id="f-rating" aria-label="Filtrar por nota">
+                        <option value="">Todas as notas</option>
+                        <option value="5">5 estrelas</option>
+                        <option value="4">4 estrelas</option>
+                        <option value="3">3 estrelas</option>
+                        <option value="2">2 estrelas</option>
+                        <option value="1">1 estrela</option>
+                    </select>
+                    <button class="btn btn--outline" id="f-clear"><i class="ri-close-line"></i> Limpar</button>
+                </div>
+
+                <p class="count" id="count"></p>
+                <div class="reviews" id="reviews"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== PAINEL DE RESPOSTA (modal) ========== -->
+    <div class="modal" id="modal" hidden>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal__head">
+                <h3 id="modal-title">Rascunho de resposta</h3>
+                <button class="icon-btn" id="modal-close" aria-label="Fechar"><i class="ri-close-line"></i></button>
+            </div>
+            <blockquote class="modal__quote" id="modal-quote"></blockquote>
+            <label for="tone">Tom de voz</label>
+            <select id="tone">
+                <option value="cordial">Cordial</option>
+                <option value="formal">Formal</option>
+                <option value="descontraido">Descontraído</option>
+            </select>
+            <label for="draft">Rascunho (edite antes de publicar)</label>
+            <textarea id="draft" rows="6"></textarea>
+            <div class="modal__actions">
+                <button class="btn btn--outline" id="regen"><i class="ri-refresh-line"></i> Gerar de novo</button>
+                <button class="btn btn--primary" id="copy"><i class="ri-file-copy-line"></i> Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> Voz do Cliente. Projeto educacional com dados de demonstração.</p>
+        </div>
+    </footer>
+
+    <!-- Botão voltar ao topo -->
+    <button class="scroll-up" id="scroll-up" aria-label="Voltar ao topo"><i class="ri-arrow-up-line"></i></button>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
